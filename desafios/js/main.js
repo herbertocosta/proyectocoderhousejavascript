@@ -81,21 +81,21 @@ console.log(mensaje); */
 /* EJERCITACIÓN DEL AFTER                                               */
 /* ------------------------------------------------------------ */
 /*Detectar el tipo de triángulo según el tamaño de los lados ingresados*/
-let lado1 = parseFloat("Ingrese Lado 1")
-let lado2 = parseFloat("Ingrese Lado 2")
-let lado3 = parseFloat("Ingrese Lado 3")
+// let lado1 = parseFloat("Ingrese Lado 1")
+// let lado2 = parseFloat("Ingrese Lado 2")
+// let lado3 = parseFloat("Ingrese Lado 3")
 
-if (!isNaN(lado1) || !isNaN(lado2) || !isNaN(lado3) {
-    if(lado1 == lado2 && lado2 == lado3){
-        alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es EQUILATERO` )
-    } else if  (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
-        alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es ISÓCELES` )
-    } else if (lado1 != lado2 && lado1 != lado3 && lado2 != lado3){
-        alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es ESCALENO` )
-    }
-}else{
-    alert(`ALGUNO DE LOS VALORES NO FUE INGRESADO` )
-}
+// if (!isNaN(lado1) || !isNaN(lado2) || !isNaN(lado3)) {
+//     if(lado1 == lado2 && lado2 == lado3){
+//         alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es EQUILATERO` )
+//     } else if  (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+//         alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es ISÓCELES` )
+//     } else if (lado1 != lado2 && lado1 != lado3 && lado2 != lado3){
+//         alert(`El triángulo de lado 1 = ${lado1}, lado2 = ${lado2} y lado 3 = ${lado3} es ESCALENO` )
+//     }
+// }else{
+//     alert(`ALGUNO DE LOS VALORES NO FUE INGRESADO` )
+// }
 
 /* ------------------------------------------------------------ */
 /* EJERCICIOS  CLASE 3                                                       */
