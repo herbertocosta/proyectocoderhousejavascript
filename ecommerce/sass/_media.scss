@@ -1,0 +1,36 @@
+/*-----MEDIA QUIERY-----*/
+@media (max-width: 425px) {
+    .header{
+        font-family: "Aldrich", sans-serif;
+        &__logo {
+            text-align: center !important;
+        }
+        &__logo  img{
+            width: $width-img*$percent-degree;
+            object-fit: contain;
+        }
+        &__titulos h1 {
+            font-size: $font-size*.8;
+        }
+        &__titulos h2 {
+            font-size: $font-size*.4;
+        }
+    }
+
+    .nav-link {
+         @include padding-margin(0rem, 0rem);
+    }
+    .footer ul {
+        justify-content: space-evenly;
+    }
+    .footer p {
+        text-align: center;
+    }
+    .barraLatDer img {
+        width: 70%;
+    }
+    ul {
+         @include padding-margin(0rem, 0rem);
+        text-align: center;
+    }
+}

@@ -1,0 +1,149 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="El club de barrio más antiguo de Buenos Aires enb el corazón de Floresta. Con muchas actividades deportivas, sociales y culturales. Bliblioteca popular y un restaurante abierto a público en general">
+    <meta name="keywords" content="CLUB, PILETA, FUTSAL, TAEKWONDO, AIKIDO, TALLER DE PINTURA, FLORESTA, BIBLIOTECA">
+    <link rel="shortcut icon" href="../img/escudo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/estilosSass.css">
+    <title>Oportunidades y Ofertas Club La Floresta</title>
+</head>
+
+
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-md-2 header__logo">
+                    <img class="animate__animated animate__backInLeft" src="../img/escudo.png"
+                        alt="escudo institucional">
+                </div>
+                <div class="col-md-10 header__titulos">
+                    <h1 class="animate__animated animate__backInRight text-center display-1">LA FLORESTA</h1>
+                    <h2 class="animate__animated animate__backInRight text-center">Asociación Cultural y Social</h2>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <div class="container-fluid   header__nav">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand " href="../index.html">
+                            <img src="../img/logo.png" alt="escudo institucional" width="40" height="40">
+                        </a>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="../index.html">INICIO</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../vistas/noticias.html">NOVEDADES</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../vistas/galeria.html">GALERIA</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../vistas/actividades.html">ACTIVIDADES</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../vistas/nosotros.html">NOSOTROS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../vistas/contacto.html">CONTACTO</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">FERIA</a>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="cuerpo">
+        <div class="row">
+            <!--Artculos-->
+            <div class="col-sm-8 row m-2">
+                <div class="card col-sm-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Remeras</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p>$599.-</p>
+                        <a href="#" class="btn btn-primary">+</a>
+                    </div>
+                </div>
+                <div class="card col-sm-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Pantalones</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p>$599.-</p>
+                        <a href="#" class="btn btn-primary">+</a>
+                    </div>
+                </div>
+                <div class="card col-sm-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p>$599.-</p>
+                        <a href="#" class="btn btn-primary">+</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carrito -->
+            <aside class="col-sm-4 row">
+                <h2>Carrito</h2>
+                <!-- Elementos del carrito -->
+                <ul id="carrito" class="list-group"></ul>
+                <hr>
+                <!-- Precio total -->
+                <p class="text-end">Total: <span id="total"></span>&dollar;</p>
+                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+            </aside>
+        </div>        
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <span></span>
+            <div class="row">
+                <div class="col-md-4 text-left">
+                    <p>copyright: herbertocosta@gmail.com</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <p>Versión 1.0</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <ul>
+                        <a href="http://twitter.com"><img height="40" src="../img/twitter.png"
+                                alt="acceso a twitter"></a>
+                        <a href="http://instagram.com"><img height="40" src="../img/instagram.jpg"
+                                alt="acceso a instagram"></a>
+                        <a href="https://www.facebook.com/laflorestaclub"><img height="40" src="../img/facebook.jpg"
+                                alt="acceso a facebook"></a>
+                        <a href="https://web.whatsapp.com/"><img height="40" src="../img/whatsapp.jpg"
+                                alt="acceso a whatsapp"></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>.
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>    

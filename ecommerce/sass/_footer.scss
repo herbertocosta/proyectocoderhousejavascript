@@ -1,0 +1,33 @@
+/*DISEÑO PIE DE PÁGINAS*/
+
+.footer {
+     @include padding-margin(0.5rem, 0.8rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    span {
+        border: $color-borde;
+        border-radius: map-get($bordes-radio, rad1515);
+        width: 100%;
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+    p {
+        margin-right: 0.5rem;
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 0.8rem;
+    }
+}
+
+#comentario {
+    text-align: center;
+    @include padding-margin(0.5rem, 0rem);
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: $color-borde;
+}

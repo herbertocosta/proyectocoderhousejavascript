@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Chakra+Petch:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+/*VARIABLES*/
+$color-text: #112a46;
+$color-text-alt: #e76f51;
+$color-borde: #e76f51 solid 1px;
+
+$font-gral: 'Roboto Condensed', sans-serif;
+$bordes-angulares:15px 0;
+$percent-degree:.6;
+$width-img:120px;
+$font-size: 3rem; 
+$bordes-radio: (
+    rad0505: 5px,
+    rad1000: 10px 0px,
+    rad1010: 10px,
+    rad1515: 15px,
+    rad2020: 20px,
+    rad5050: 50%
+);
+
+@mixin padding-margin($padsize, $margsize) {
+    padding: $padsize;
+    margin: $margsize;
+}
+
+
+/*DISEÑO GENERAL*/
+* {
+     @include padding-margin(0rem, 0rem);
+    box-sizing: border-box;
+}
+
+html {
+    font-family: $font-gral;
+    color: $color-text;
+}
+
+/*DISEÑO HEADER DE LAS PÁGINAS*/
+
+.header {
+    color: $color-text;
+    background-image: url("../img/fondoHeader.jpg");
+    background-size: cover;
+    background-position: top;
+     @include padding-margin(0.4rem, 0rem);
+    position: sticky;
+    top: 0;
+    border: $color-borde;
+    border-radius: map-get($bordes-radio, rad1515);
+    z-index: 9999;
+    font-family: "Aldrich", sans-serif;
+    &__logo img {
+        width: $width-img;
+        object-fit: contain;
+    }
+    &__titulos h1 {
+        font-size: $font-size;
+    }
+    &__titulos h2 {
+        font-size: $font-size*.5;
+    }
+    &__nav {
+        background-color: $color-text;
+        @include padding-margin(0rem, 0rem); 
+        border: $color-borde;
+        border-radius: map-get($bordes-radio, rad0505);
+        & a {
+            color: $color-borde !important;
+            text-decoration: none;
+            font-size: 1rem;
+            text-align: center;
+        }
+        & a:hover {
+            color: white !important;
+            font-weight: bold;
+        }
+    }
+}

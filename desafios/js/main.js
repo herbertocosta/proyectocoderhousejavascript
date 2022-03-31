@@ -210,7 +210,7 @@ while (numero != undefined) {
 */
 
 
-let dato;
+/* let dato;
 let cantNumeros = 0;
 let cantPrimos = 0;
 let sumaPrimos = 0;
@@ -219,6 +219,7 @@ let promedioPrimos = 0;
 dato = prompt("INGRESE UN NÚMERO \n (OPRIMA CANCELAR CUANDO QUIERA TERMINAR)")
 while (dato != undefined) {
     dato = parseInt(dato);
+    console.log(dato);
     cantNumeros++;
     if (dato > 1){
         primo = true;
@@ -240,4 +241,59 @@ if (cantPrimos != 0){
     promedioPrimos = sumaPrimos / cantPrimos;
 }
 
-alert(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad de Números primos es ${cantPrimos} \n La suma total de Números primos fue de ${sumaPrimos} \n El promedio de Números primos fue de ${promedioPrimos}`);
+alert(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad de Números primos es ${cantPrimos} \n La suma total de Números primos fue de ${sumaPrimos} \n El promedio de Números primos fue de ${promedioPrimos}`); */
+
+/* ------------------------------------------------------------ */
+/* EJERCICIOS  CLASS  4                                                      */
+/* ------------------------------------------------------------ */
+/*escribir una funcion que acepte un numero y que me diga si es primo o no
+    CONSIGNA
+        Calcular el promedio de los números PRIMOS ingresados por el USUARIO
+        El USUARIO puede detener el programa cuando oprima 'CANCELAR'
+        Debe mostrar:
+            La cantidad de números ingresados
+            La cantidad de primos ingresados
+            El promedio de los números primos ingresados
+*/
+
+let dato;
+let cantNumeros = 0;
+let cantPrimos = 0;
+let sumaPrimos = 0;
+let promedioPrimos = 0;
+
+function verificarPrimo() {
+    if (dato > 1) {
+        primo = true;
+        for (let i = 2; i < dato; i++) {
+            if (dato % i == 0) {
+                primo = false;
+            }
+        }
+    } else {
+        primo = false;
+    }
+}
+
+
+dato = prompt("INGRESE UN NÚMERO \n (OPRIMA CANCELAR CUANDO QUIERA TERMINAR)")
+while (dato != undefined) {
+    dato = parseInt(dato);
+    console.log(dato);
+    cantNumeros++;
+    verificarPrimo();
+    if (primo) {
+        cantPrimos++;
+        sumaPrimos += dato;
+    }
+    dato = prompt("INGRESE UN NÚMERO \n (OPRIMA CANCELAR CUANDO QUIERA TERMINAR)")
+}
+
+if (cantPrimos != 0){
+    promedioPrimos = sumaPrimos / cantPrimos;
+}
+
+alert(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad de Números primos es ${cantPrimos} \n La suma total de Números primos fue de ${sumaPrimos} \n El promedio de Números primos fue de ${promedioPrimos}`); 
+
+console.log(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad de Números primos es ${cantPrimos} \n La suma total de Números primos fue de ${sumaPrimos} \n El promedio de Números primos fue de ${promedioPrimos}`
+);
