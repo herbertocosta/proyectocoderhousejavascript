@@ -349,7 +349,7 @@ do {
             continue
         }
     } else {
-        articulo = articulo.toUpperCase;
+        articulo = articulo.toUpperCase();
         if ( articulo == prod1.nombre || articulo == prod2.nombre || articulo == prod3.nombre || articulo == prod4.nombre) 
         {
            cantidad = prompt("Elija la cantidad que quiere comprar");
