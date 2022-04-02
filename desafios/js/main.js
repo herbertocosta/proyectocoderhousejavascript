@@ -256,7 +256,7 @@ alert(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad d
             El promedio de los números primos ingresados
 */
 
-let dato;
+/* let dato;
 let cantNumeros = 0;
 let cantPrimos = 0;
 let sumaPrimos = 0;
@@ -297,3 +297,81 @@ alert(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad d
 
 console.log(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cantidad de Números primos es ${cantPrimos} \n La suma total de Números primos fue de ${sumaPrimos} \n El promedio de Números primos fue de ${promedioPrimos}`
 );
+ */
+
+/* ------------------------------------------------------------ */
+/* DESAFÍO GENÉRICO  CLASS  5                                        */
+/* ------------------------------------------------------------ */
+
+class Producto{
+    constructor(categoria, nombre, precio, stock){
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.precio = precio;
+        this.sctock = stock;
+    }
+    aplicarDescuento(){
+        if(this.precio > 1000){
+            this.precio = this.precio*0.9;
+        }
+        return this.preciofinal;
+    }
+    comprar(cantidad){
+        if (this.stock >= cantidad) {
+            this.stock -= cantidad;
+            return `EL PRECIO FINAL DE SU COMPRA DE ${this.nombre} AL VALOR UNITARIO DE ${this.precio} TIENE UN VALOR TOTAL DE ${this.precio * cantidad}`;
+        } else {
+            return `NO HAY SUFICIENTE STOCK DE ESE PRODUCTO, LOS SENTIMOS MUCHO`;
+        }
+    }
+}
+
+const prod1 = new Producto("OFERTAS","CAMPERA",25000,10);
+const prod2 = new Producto("OFERTAS","REMERA",250,15);
+const prod3 = new Producto("OFERTAS","PANTALÓN",2500,3);
+const prod4 = new Producto("OFERTAS","MEDIAS",25,8);
+prod1.aplicarDescuento;
+prod2.aplicarDescuento;
+prod3.aplicarDescuento;
+prod4.aplicarDescuento;
+let articulo;
+let cantidad;
+alert(` ${prod1.nombre} \n ${prod2.nombre} \n ${prod3.nombre} \n ${prod4.nombre}`)
+do {
+    articulo = prompt("Elija el producto que quiere comprar");
+    if (articulo === null) 
+    {
+        if (confirm("¿DESEA INTERRUMPIR SU COMPRA?")) 
+        {
+            alert("LAMENTAMOS NO HAYA ENCONTRADO EL PRODUCTO DE SU AGRADO");
+            break;
+        } else {
+            continue
+        }
+    } else {
+        articulo = articulo.toUpperCase;
+        if ( articulo == prod1.nombre || articulo == prod2.nombre || articulo == prod3.nombre || articulo == prod4.nombre) 
+        {
+           cantidad = prompt("Elija la cantidad que quiere comprar");
+            switch (articulo) {
+                case prod1.nombre:
+                    alert(prod1.comprar(cantidad));
+                    break;
+                case prod2.nombre:
+                    alert(prod2.comprar(cantidad));
+                    break;
+                case prod3.nombre:
+                    alert(prod3.comprar(cantidad));
+                    break;
+                case prod4.nombre:
+                    alert(prod4.comprar(cantidad));
+                    break;
+            }
+        } else {
+            alert(`LO SENTIMOS NO TENEMOS ${articulo}`)
+        }
+    }
+} while (true);
+
+
+/* metodo para fijarse si hay stock */
