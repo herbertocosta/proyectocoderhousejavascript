@@ -1,89 +1,100 @@
 class Contacto{
     
-    constructor(){
-        this.formNombre;
-        this.formApellido;
-        this.formEmail;
-        this.formTelefono;
-        this.formMensaje;
-        this.formRecibirNovedades;
-        this.formNroSocio;
-        this.mensajeError;
+    constructor(formNombre, formApellido, formEmail, formTelefono, formMensaje, formRecibirNovedades, formNroSocio){
+        this.formNombre=formNombre;
+        this.formApellido=formApellido;
+        this.formEmail=formEmail;
+        this.formTelefono=formTelefono;
+        this.formMensaje=formMensaje;
+        this.formRecibirNovedades=formRecibirNovedades;
+        this.formNroSocio=formNroSocio;
     }
+    
+    limpiarContacto = () =>{
+        this.formNombre = null;
+        this.formApellido = null;
+        this.formEmail = null;
+        this.formTelefono = null;
+        this.formMensaje = null;
+        this.formRecibirNovedades = null;
+        this.formNroSocio = null;
 
-    cargarFormulario = () => {
-        this.formNombre = prompt("INGRESE SU NOMBRE");
-        if (this.formNombre === null){
+    }
+}
+
+cargarFormulario = (contacto) => {
+        contacto.formNombre = prompt("INGRESE SU NOMBRE");
+        if (contacto.formNombre === null){
             return false;
         };
-        this.formApellido = prompt("INGRESE SU APELLIDO");
-        if (this.formApellido === null){
+        contacto.formApellido = prompt("INGRESE SU APELLIDO");
+        if (contacto.formApellido === null){
             return false;
         } ;
-        this.formEmail = prompt("INGRESE SU DIRECCIÓN DE CORREO");
-        if (this.formEmail === null) {
+        contacto.formEmail = prompt("INGRESE SU DIRECCIÓN DE CORREO");
+        if (contacto.formEmail === null) {
             return false;
         };
-        this.formTelefono = prompt("INGRESE SU TELÉFONO DE CONTACTO");
-        if (this.formTelefono === null){
+        contacto.formTelefono = prompt("INGRESE SU TELÉFONO DE CONTACTO");
+        if (contacto.formTelefono === null){
             return false;
         };
-        this.formMensaje = prompt("INGRESE EL MENSAJE, COMENTARIO o QUEJA");
-        if (this.formMensaje === null){
+        contacto.formMensaje = prompt("INGRESE EL MENSAJE, COMENTARIO o QUEJA");
+        if (contacto.formMensaje === null){
             return false;
         };
         if (confirm("¿QUIERE QUE LE ENVIEMOS INFO DE INTERÉS?")) {
-            this.formRecibirNovedades = true;
+            contacto.formRecibirNovedades = true;
         } else {
-            this.formRecibirNovedades = false;
+            contacto.formRecibirNovedades = false;
         };
         if (confirm("¿ES UD. SOCIO?")) {
-            this.formNroSocio = prompt("INGRESE SU NRO DE ASOCIADO");
-            if(this.formNroSocio === null){
-                this.formNroSocio = 'DICE SER SOCIO PERO NO LO PUSO';
+            contacto.formNroSocio = prompt("INGRESE SU NRO DE ASOCIADO");
+            if(contacto.formNroSocio === null){
+                contacto.formNroSocio = 'DICE SER SOCIO PERO NO LO PUSO';
             };
         }
         return true;  
     }
-
-    validarFormulario = () =>  {
-        this.mensajeError = '';
     
-        if(this.formNombre === '') {
-            this.mensajeError += `EL NOMBRE ES OBLIGATORIO \n`
+    validarFormulario = (contacto) =>  {
+        let mensajeError = '';
+    
+        if(contacto.formNombre === '') {
+            mensajeError += `EL NOMBRE ES OBLIGATORIO \n`
         }
-        if(this.formApellido === '') {
-            this.mensajeError += `EL APELLIDO ES OBLIGATORIO \n`
+        if(contacto.formApellido === '') {
+            mensajeError += `EL APELLIDO ES OBLIGATORIO \n`
         }
-        if(this.formEmail === '' && this.formTelefono === '') {
-            this.mensajeError += `EL CORREO ELECTRÓNICO O SU TELÉFONO SON NECESARIOS (¡NO PODRÍAMOS RESPONDERLE!) \n`
+        if(contacto.formEmail === '' && contacto.formTelefono === '') {
+            mensajeError += `EL CORREO ELECTRÓNICO O SU TELÉFONO SON NECESARIOS (¡NO PODRÍAMOS RESPONDERLE!) \n`
         }
-        if(this.formMensaje === '') {
-            this.mensajeError += `¡EL MENSAJE ES IMPORTANTISIMO PARA NOSOTROS! ¡NO LO OLVIDES, POR FAVOR! \n`
+        if(contacto.formMensaje === '') {
+            mensajeError += `¡EL MENSAJE ES IMPORTANTISIMO PARA NOSOTROS! ¡NO LO OLVIDES, POR FAVOR! \n`
         }
+        return mensajeError;
     }
 
-    enviarFormulario = () => {
-        let activarSocio = (this.formNroSocio === null ? '' : `NRO DE SOCIO ${this.formNroSocio}`);
-        let activarMensajes = (this.formRecibirNovedades === false ? 'NO QUIERO RECIBIR INFORMACIÓN' : `ENVIAR INFORMACIÓN SOBRE LAS ACTIVIDADES DEL CLUB`);
-        let bodyMail = `mailto:herbertocosta@gmail.com?subject=MENSAJE DE: ${this.formApellido.toUpperCase}, ${this.formNombre.toUpperCase} ${activarSocio} \n &body=${this.formMensaje} \n ${activarMensajes} COMUNICARSE AL ${this.formTelefono} O POR MAIL A ${this.formEmail}`;
+    enviarFormulario = (contacto) => {
+        let activarSocio = (contacto.formNroSocio === null ? '' : `NRO DE SOCIO ${contacto.formNroSocio}`);
+        let activarMensajes = (contacto.formRecibirNovedades === false ? 'NO QUIERO RECIBIR INFORMACIÓN' : `ENVIAR INFORMACIÓN SOBRE LAS ACTIVIDADES DEL CLUB`);
+        let bodyMail = `mailto:herbertocosta@gmail.com?subject=MENSAJE DE: ${contacto.formApellido.toUpperCase}, ${contacto.formNombre.toUpperCase} ${activarSocio} \n &body=${contacto.formMensaje} \n ${activarMensajes} COMUNICARSE AL ${contacto.formTelefono} O POR MAIL A ${contacto.formEmail}`;
         console.log(bodyMail);
         alert(bodyMail);
     }
     
-}
 
     //Creo un objeto para el nuevo contacto
-    const nuevoContacto = new Contacto();
+    const nuevoContacto = new Contacto(null,null,null,null,null,null,null);
+    const arrayContactos = [];
     //Loopeo por si se equivocó  durante el proceso y quiere enviar un mensaje
     do {
-        if(nuevoContacto.cargarFormulario()){
-            nuevoContacto.validarFormulario()
-            if(nuevoContacto.mensajeError.length == 0) {
-                nuevoContacto.enviarFormulario();
+        if(cargarFormulario(nuevoContacto)){
+            if(validarFormulario(nuevoContacto).length == 0) {
+                enviarFormulario(nuevoContacto);
             }else{
-                console.log(nuevoContacto.mensajeError);
-                alert(nuevoContacto.mensajeError);
+                console.log(validarFormulario(nuevoContacto));
+                alert(validarFormulario(nuevoContacto));
                 if (confirm("¿QUIERE VOLVER A INTENTARLO?")) {
                     continue;
                 }else{
@@ -94,6 +105,8 @@ class Contacto{
             if (confirm("¿QUIERE CANCELAR EL MENSAJE?")) {
                 break;
             }else{
+                arrayContactos.push(nuevoContacto);
+                nuevoContacto.limpiarContacto();
                 continue;
             }
         }; 
