@@ -57,60 +57,60 @@ cargarFormulario = (contacto) => {
         return true;  
     }
     
-    validarFormulario = (contacto) =>  {
-        let mensajeError = '';
-    
-        if(contacto.formNombre === '') {
-            mensajeError += `EL NOMBRE ES OBLIGATORIO \n`
-        }
-        if(contacto.formApellido === '') {
-            mensajeError += `EL APELLIDO ES OBLIGATORIO \n`
-        }
-        if(contacto.formEmail === '' && contacto.formTelefono === '') {
-            mensajeError += `EL CORREO ELECTRÓNICO O SU TELÉFONO SON NECESARIOS (¡NO PODRÍAMOS RESPONDERLE!) \n`
-        }
-        if(contacto.formMensaje === '') {
-            mensajeError += `¡EL MENSAJE ES IMPORTANTISIMO PARA NOSOTROS! ¡NO LO OLVIDES, POR FAVOR! \n`
-        }
-        return mensajeError;
-    }
+validarFormulario = (contacto) =>  {
+    let mensajeError = '';
 
-    enviarFormulario = (contacto) => {
-        let activarSocio = (contacto.formNroSocio === null ? '' : `NRO DE SOCIO ${contacto.formNroSocio}`);
-        let activarMensajes = (contacto.formRecibirNovedades === false ? 'NO QUIERO RECIBIR INFORMACIÓN' : `ENVIAR INFORMACIÓN SOBRE LAS ACTIVIDADES DEL CLUB`);
-        let bodyMail = `mailto:herbertocosta@gmail.com?subject=MENSAJE DE: ${contacto.formApellido.toUpperCase}, ${contacto.formNombre.toUpperCase} ${activarSocio} \n &body=${contacto.formMensaje} \n ${activarMensajes} COMUNICARSE AL ${contacto.formTelefono} O POR MAIL A ${contacto.formEmail}`;
-        console.log(bodyMail);
-        alert(bodyMail);
+    if(contacto.formNombre === '') {
+        mensajeError += `EL NOMBRE ES OBLIGATORIO \n`
     }
+    if(contacto.formApellido === '') {
+        mensajeError += `EL APELLIDO ES OBLIGATORIO \n`
+    }
+    if(contacto.formEmail === '' && contacto.formTelefono === '') {
+        mensajeError += `EL CORREO ELECTRÓNICO O SU TELÉFONO SON NECESARIOS (¡NO PODRÍAMOS RESPONDERLE!) \n`
+    }
+    if(contacto.formMensaje === '') {
+        mensajeError += `¡EL MENSAJE ES IMPORTANTISIMO PARA NOSOTROS! ¡NO LO OLVIDES, POR FAVOR! \n`
+    }
+    return mensajeError;
+}
+
+enviarFormulario = (contacto) => {
+    let activarSocio = (contacto.formNroSocio === null ? '' : `NRO DE SOCIO ${contacto.formNroSocio}`);
+    let activarMensajes = (contacto.formRecibirNovedades === false ? 'NO QUIERO RECIBIR INFORMACIÓN' : `ENVIAR INFORMACIÓN SOBRE LAS ACTIVIDADES DEL CLUB`);
+    let bodyMail = `mailto:herbertocosta@gmail.com?subject=MENSAJE DE: ${contacto.formApellido.toUpperCase}, ${contacto.formNombre.toUpperCase} ${activarSocio} \n &body=${contacto.formMensaje} \n ${activarMensajes} COMUNICARSE AL ${contacto.formTelefono} O POR MAIL A ${contacto.formEmail}`;
+    console.log(bodyMail);
+    alert(bodyMail);
+}
     
 
-    //Creo un objeto para el nuevo contacto
-    const nuevoContacto = new Contacto(null,null,null,null,null,null,null);
-    const arrayContactos = [];
-    //Loopeo por si se equivocó  durante el proceso y quiere enviar un mensaje
-    do {
-        if(cargarFormulario(nuevoContacto)){
-            if(validarFormulario(nuevoContacto).length == 0) {
-                enviarFormulario(nuevoContacto);
-            }else{
-                console.log(validarFormulario(nuevoContacto));
-                alert(validarFormulario(nuevoContacto));
-                if (confirm("¿QUIERE VOLVER A INTENTARLO?")) {
-                    continue;
-                }else{
-                    break;
-                }
-            }
+//Creo un objeto para el nuevo contacto
+const nuevoContacto = new Contacto(null,null,null,null,null,null,null);
+const arrayContactos = [];
+//Loopeo por si se equivocó  durante el proceso y quiere enviar un mensaje
+do {
+    if(cargarFormulario(nuevoContacto)){
+        if(validarFormulario(nuevoContacto).length == 0) {
+            enviarFormulario(nuevoContacto);
         }else{
-            if (confirm("¿QUIERE CANCELAR EL MENSAJE?")) {
-                break;
-            }else{
-                arrayContactos.push(nuevoContacto);
-                nuevoContacto.limpiarContacto();
+            console.log(validarFormulario(nuevoContacto));
+            alert(validarFormulario(nuevoContacto));
+            if (confirm("¿QUIERE VOLVER A INTENTARLO?")) {
                 continue;
+            }else{
+                break;
             }
-        }; 
-        break;
-    } while (true);
+        }
+    }else{
+        if (confirm("¿QUIERE CANCELAR EL MENSAJE?")) {
+            break;
+        }else{
+            arrayContactos.push(nuevoContacto);
+            nuevoContacto.limpiarContacto();
+            continue;
+        }
+    }; 
+    break;
+} while (true);
 //}
 
