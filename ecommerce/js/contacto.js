@@ -82,7 +82,7 @@ enviarFormulario = (contacto) => {
     console.log(bodyMail);
     alert(bodyMail);
 }
-    
+
 
 //Creo un objeto para el nuevo contacto
 const nuevoContacto = new Contacto(null,null,null,null,null,null,null);
@@ -92,6 +92,9 @@ do {
     if(cargarFormulario(nuevoContacto)){
         if(validarFormulario(nuevoContacto).length == 0) {
             enviarFormulario(nuevoContacto);
+            arrayContactos.push([nuevoContacto.formApellido, nuevoContacto.formNombre, nuevoContacto.formEmail, nuevoContacto.formTelefono, nuevoContacto.formMensaje, nuevoContacto.formNroSocio, nuevoContacto.formRecibirNovedades]);
+            console.log(arrayContactos);
+            nuevoContacto.limpiarContacto();
         }else{
             console.log(validarFormulario(nuevoContacto));
             alert(validarFormulario(nuevoContacto));
@@ -105,8 +108,6 @@ do {
         if (confirm("¿QUIERE CANCELAR EL MENSAJE?")) {
             break;
         }else{
-            arrayContactos.push(nuevoContacto);
-            nuevoContacto.limpiarContacto();
             continue;
         }
     }; 
