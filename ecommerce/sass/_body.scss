@@ -79,6 +79,12 @@ background: linear-gradient(133deg, rgba(36,0,0,0.9976365546218487) 0%, rgba(221
     &__articulo {
         text-align: justify;
     }
+    &__valido{
+        border-color: green;
+    }
+    &__vacio{
+        border-color: red;
+    }
 }
 
 

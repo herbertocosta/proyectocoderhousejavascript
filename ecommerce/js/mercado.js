@@ -1,3 +1,13 @@
+//DEFINIR VARIABLES Y OBJETOS GLOBALES
+const productos = [];
+const carrito = [];
+let articulo = "";
+let cantidad = 0;
+let monto = 0;
+const newCategoria = document.getElementById("articulos");
+const newTotal = document.getElementById("total");
+
+
 class Producto {
     constructor(categoria, codigo, nombre, precio, stock) {
         this.nombre = nombre;
@@ -35,7 +45,6 @@ class Carrito {
     }
 
     eliminar(carrito, item) {
-
         if (this.precio > 1000) {
             this.precio = this.precio * 0.9;
         }
@@ -74,106 +83,83 @@ function cargarProductos() {
 
 function listarProductos() {
     let listaProductos = "";
-    let categoria = ""
-    for (const key in productos) 
-    {
-        if(categoria == "" || categoria != productos[key].categoria){
+    let categoria = "";
+    //RECORRO LA LISTA DE PRODUCTOS
+    for (const key in productos) {
+        //AGREGO CATEGORÍAS DE PRODUCTOS
+        if (categoria === "" || categoria !== productos[key].categoria) {
             categoria = productos[key].categoria;
-            listaProductos += `==========================\n ${categoria} \n==========================\n`;
+            let newTitulo = document.createTextNode(categoria);
+            newCategoria.insertAdjacentHTML(
+                "beforeend",
+                `<div id="${categoria}" class="row m-2"><h5>${categoria}</h5></div>`
+            );
         }
-        productos[key].aplicarDescuento;
-        listaProductos += `Producto: ${productos[key].codigo} - ${productos[key].nombre} $${productos[key].precio} Stock: ${productos[key].stock }  \n`;
+        //AGREGO PRODUCTOS
+        newDetalle = document.getElementById(categoria);
+        newDetalle.insertAdjacentHTML(
+            "beforeend",
+            `<div class="card col-sm-4">
+                    <div class="card-body">
+                        <h5 class="card-title">${productos[key].nombre}</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p>$${productos[key].precio}.-</p>
+                        <a  id="${productos[key].codigo}" href="#" class="btn btn-primary idprod">+</a>
+                    </div>
+                </div>`
+        );
     }
-    alert(
-        listaProductos
-    );
 }
-    
-function listarCarrito() {
+
+function agregarCarrito(id) {
+    const resultado = productos.find(producto => producto.codigo == id)
+    newCarrito = document.getElementById("listacarrito")
+    newCarrito.insertAdjacentHTML(
+        "beforeend",
+        `<li name"item-carrito" class="text-end item-carrito">${resultado.nombre} --> ${resultado.precio}</li>`
+    );
+    carrito.push(resultado);
+    monto += resultado.precio;
+    newTotal.textContent = monto
+}
+
+function cerrarCompra() {
     let listaProductos = "";
     let totalCarrito = 0;
     for (const key in carrito) {
-        listaProductos += `# ${key} Producto: ${carrito[key].producto} $${
-            carrito[key].precio
-        } Cantidad: ${carrito[key].cantidad} Monto: ${
-            parseInt(carrito[key].precio) * parseInt(carrito[key].cantidad)
-        } \n`;
-        totalCarrito +=
-            parseInt(carrito[key].precio) * parseInt(carrito[key].cantidad);
+        listaProductos += `# ${key} Producto: ${carrito[key].nombre} Cantidad: 1 Monto: ${parseInt(carrito[key].precio)} \n`;
+        totalCarrito += parseInt(carrito[key].precio);
     }
     listaProductos += `========================== \n TOTAL DE LA COMPRA: ${totalCarrito} \n==========================`;
     alert(listaProductos);
 }
 
-function cerrarCompra() {
-    listarCarrito();
-}
 
-function quitarCarrito() {
-    do {
-        listarCarrito();
-        articulo = parseInt(prompt("Elija el Producto que quiere QUITAR"));
-    
-        if (!isNaN(articulo) && parseInt(articulo) < carrito.length)
-        {
-            carrito.splice(articulo, 1);
-        } else {
-            if (isNaN(articulo)) {
-                break;
-            } else {
-                alert(`LO SENTIMOS NO EXISTE EL CÓDIGO ${articulo}`);
-            }
+window.onload = () => {
+    cargarProductos();
+    listarProductos();
+    const cerrarCarrito = document.getElementById("boton-comprar");
+    cerrarCarrito.addEventListener("click", function () {
+        cerrarCompra();
+    })
+    //VACIAR EL CARRITO
+    const quitarCarrito = document.getElementById("boton-vaciar");
+    quitarCarrito.addEventListener("click", () =>{
+        const listaCarrito = document.querySelectorAll(".item-carrito")
+        for (let i = 0; i < listaCarrito.length; i++) {
+            const padre = listaCarrito[i].parentNode;
+            padre.removeChild(listaCarrito[i]);
         }
-    } while (true);
-}
-
-const productos = [];
-const carrito = [];
-
-cargarProductos();
-
-listarProductos();
-
-let articulo = "";
-let cantidad = 0;
-
-do {
-    articulo = prompt("Elija el código del producto que quiere comprar");
-    if (articulo === null) {
-        if (carrito.length > 0){
-            if (confirm("¿DESEA CERRAR LA COMPRA?")){
-                cerrarCompra();
-                break;
-            } else {
-                if (confirm("¿QUIERE QUITAR UN PRODUCTO")){
-                    quitarCarrito()
-                }
-            }
-        } else {
-            if (confirm("¿DESEA INTERRUMPIR SU COMPRA?")) {
-                alert("LAMENTAMOS NO HAYA ENCONTRADO EL PRODUCTO DE SU AGRADO");
-                break;
-            } else {
-                continue;
-            }
-        }
-    } else {
-        results = productos.filter(function (producto) { return producto.codigo == articulo; });
-        if (results.length > 0){
-            cantidad = parseInt(prompt("Elija la cantidad que quiere comprar"));
-            if (parseInt(results[0].stock) >= cantidad)
-            {
-                results[0].stock -= cantidad;
-                carrito.push(new Carrito(results[0].codigo, results[0].nombre, results[0].precio, cantidad));
-                let idx = productos.findIndex((el) => el.codigo == results[0].codigo);
-                productos[idx].stock = results[0].stock;
-            }
-            else
-            {
-                alert("STOCK INSUFICIENTE");
-            }
-        } else {
-            alert(`LO SENTIMOS NO TENEMOS ${articulo}`);
-        }
+        monto = 0;
+        newTotal.textContent = monto;
+    })
+    //SELECCIONAR ITEMS PARA AGREGAR AL CARRITO
+    const codigoProducto = document.querySelectorAll(".idprod");
+    for (let i = 0; i < codigoProducto.length; i++) {
+        codigoProducto[i].addEventListener("click", function () {
+            agregarCarrito(this.id)
+            //console.log(this.id) 
+        })
     }
-} while (true);
+}
+
