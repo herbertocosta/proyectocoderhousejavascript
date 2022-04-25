@@ -1,7 +1,7 @@
 /* DISEÑO BARRA NAVEGACIÓN INTERIOR */
 body{
-  background: rgb(36,0,0);
-background: linear-gradient(133deg, rgba(36,0,0,0.9976365546218487) 0%, rgba(221,11,11,1) 0%, rgba(193,244,205,0.896796218487395) 21%);
+background: rgb(242,58,58);
+background: linear-gradient(135deg, rgba(242,58,58,1) 15%, rgba(145,199,128,1) 25%);
 }
 .cuerpo {
     font-family: $font-gral;
@@ -166,4 +166,14 @@ background: linear-gradient(133deg, rgba(36,0,0,0.9976365546218487) 0%, rgba(221
 
 .tarifa {
     text-align: center;
+}
+
+.resumen{
+    z-index: 9999;
+}
+
+.img-buffet{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }

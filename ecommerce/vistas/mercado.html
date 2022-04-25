@@ -6,9 +6,9 @@
         content="El club de barrio más antiguo de Buenos Aires enb el corazón de Floresta. Con muchas actividades deportivas, sociales y culturales. Bliblioteca popular y un restaurante abierto a público en general">
     <meta name="keywords" content="CLUB, PILETA, FUTSAL, TAEKWONDO, AIKIDO, TALLER DE PINTURA, FLORESTA, BIBLIOTECA">
     <link rel="shortcut icon" href="../img/escudo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../css/estilosSass.css">
     <title>Oportunidades y Ofertas Club La Floresta</title>
 </head>
@@ -59,7 +59,7 @@
                                     <a class="nav-link" href="../vistas/contacto.html">CONTACTO</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">FERIA</a>
+                                    <a class="nav-link" href="#">BUFFET</a>
                                 </li>
                             </ul>
                             <form class="d-flex">
@@ -77,78 +77,74 @@
         <div class="row">
             <!--Artculos-->
             <div id="articulos" class="col-sm-8">
-                <!-- <div class="row m-2">
-                <h5>PIZZAS</h5>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">PEPPERONI</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$750.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">VEGETARIANA</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$599.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">HAWAIANA</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$890.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="row m-2">
-                    <h5 name="categoria">LAS MÁS VENDIDAS</h5>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">POLLO ASADO</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$599.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">CLÁSICA SUPER</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$599.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                    <div class="card col-sm-4">
-                        <div class="card-body">
-                            <h5 class="card-title">JAMÓN Y ALBAHACA</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <p>$599.-</p>
-                            <a href="#" class="btn btn-primary">+</a>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <!-- Carrito -->
             <div id="carrito" class="col-4">
             <aside class="row m-2">
                 <h2>Carrito</h2>
                 <!-- Elementos del carrito -->
-                <ul id="listacarrito" class="list-group text-end">
-                </ul>
+                <table  id="listacarrito" class="table  table-sm table-bordered table-striped table-hover border table-responsive" style="border-collapse: collapse;">
+                    <thead>
+                        <tr class="text-center small">
+                            <th>#</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                    
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="fw-bold text-end ">TOTAL $</td>
+                            <td id="total" class="text-end"></td>
+                        </tr>
+                    </tfoot>
+                </table>
                 <hr>
-                <!-- Precio total -->
-                <p class="text-end">Total: <span id="total"></span>&dollar;</p>
                 <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                <button id="boton-comprar" class="btn btn-success mt-2">Comprar</button>
+                <button id="boton-comprar" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Comprar</button>
             </aside>
             </div>
         </div>        
     </main>
-
+    <!-- RESUMEN DE COMPRA (Modal) -->
+    <div class="modal fade resumen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resúmen de su Compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table id="minuta" class="table table-bordered border-primary" >
+                        <thead>
+                            <tr class="text-center small">
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                    
+                        </tbody>
+                        <tfoot>
+                            <tr >
+                                <th colspan="3" class="fw-bold text-end ">TOTAL </th>
+                                <td id="montoMinuta" class="text-end"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Pagar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="footer">
         <div class="container-fluid">
             <span></span>
