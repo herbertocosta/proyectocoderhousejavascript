@@ -103,15 +103,18 @@ function cargarProductos() {
 function listarProductos() {
     let listaProductos = "";
     let categoria = "";
+    let categoriaAnt = "";
     //RECORRO LA LISTA DE PRODUCTOS
-    for (const key in productos) {
+    productos.forEach((element) => {
+        //APLICO DESESTRUCTURACIÓN
+        let { categoria, nombre, imagen, precio, codigo } = element;
         //AGREGO CATEGORÍAS DE PRODUCTOS
-        if (categoria === "" || categoria !== productos[key].categoria) {
-            categoria = productos[key].categoria;
-            let newTitulo = document.createTextNode(categoria);
+        if (categoriaAnt === "" || categoriaAnt !== categoria) {
+            categoriaAnt = categoria;
+            let newTitulo = document.createTextNode(categoriaAnt);
             newCategoria.insertAdjacentHTML(
                 "beforeend",
-                `<div id="${categoria}" class="row m-2"><h5>${categoria}</h5></div>`
+                `<div id="${categoriaAnt}" class="row m-2"><h5>${categoriaAnt}</h5></div>`
             );
         }
         //AGREGO PRODUCTOS SEGÚN CATEGTORIA
@@ -120,23 +123,44 @@ function listarProductos() {
             "beforeend",
             `<div class="card col-sm-4">
                 <div class="card-body">
-                    <h5 class="card-title">${productos[key].nombre}</h5>
+                    <h5 class="card-title">${nombre}</h5>
                     <div>
-                    <img src="${productos[key].imagen}" class="card-img-top img-buffet" alt="...">
+                    <img src="${imagen}" class="card-img-top img-buffet" alt="...">
                     </div>
-                    <p>$${productos[key].precio}.- 
-                    <button id="${productos[key].codigo}" class="btn btn-primary idprod">+</button></p>
+                    <p>$${precio}.- 
+                    <button id="${codigo}" class="btn btn-primary idprod">+</button></p>
                 </div>
             </div>`
         );
-    }
-}
-
-function listarCarrito() {
-    if (localStorage.getItem("carrito") != null){
-        productosCarrito = JSON.parse(localStorage.getItem("carrito"));
-        llenarCarritoHTML();
-    }
+    });
+    
+    // //RECORRO LA LISTA DE PRODUCTOS
+    // for (const key in productos) {
+    //     //AGREGO CATEGORÍAS DE PRODUCTOS
+    //     if (categoria === "" || categoria !== productos[key].categoria) {
+    //         categoria = productos[key].categoria;
+    //         let newTitulo = document.createTextNode(categoria);
+    //         newCategoria.insertAdjacentHTML(
+    //             "beforeend",
+    //             `<div id="${categoria}" class="row m-2"><h5>${categoria}</h5></div>`
+    //         );
+    //     }
+    //     //AGREGO PRODUCTOS SEGÚN CATEGTORIA
+    //     newDetalle = document.getElementById(categoria);
+    //     newDetalle.insertAdjacentHTML(
+    //         "beforeend",
+    //         `<div class="card col-sm-4">
+    //             <div class="card-body">
+    //                 <h5 class="card-title">${productos[key].nombre}</h5>
+    //                 <div>
+    //                 <img src="${productos[key].imagen}" class="card-img-top img-buffet" alt="...">
+    //                 </div>
+    //                 <p>$${productos[key].precio}.- 
+    //                 <button id="${productos[key].codigo}" class="btn btn-primary idprod">+</button></p>
+    //             </div>
+    //         </div>`
+    //     );
+    // }
 }
 
 function agregarCarrito(id) {
@@ -195,17 +219,34 @@ function limpiarCarritoHTML() {
 
 function llenarCarritoHTML() {
     totalCarrito = 0;
-    for (let i = 0; i < productosCarrito.length; i++) {
+    let i = 0;
+    productosCarrito.forEach(element => {
+        //Aplico DESESTRUCTURACIÓN
+        let {nombre, cantidad, precio, subtotal} = element;
+
         let fila = document.createElement("tr");
         fila.setAttribute("class", "item-carrito");
-        fila.innerHTML = `<td><button id="${i}" class="bi bi-trash btn btn-warning quitar"></button></td>
-        <td>${productosCarrito[i].nombre}</td>
-        <td>${productosCarrito[i].cantidad}</td>
-        <td>${productosCarrito[i].precio}</td>
-        <td class="text-end">$${productosCarrito[i].subtotal}</td>`;
+        fila.innerHTML = 
+        `<td><button id="${i}" class="bi bi-trash btn btn-warning quitar"></button></td>
+         <td>${nombre}</td>
+         <td>${cantidad}</td>
+         <td>${precio}</td>
+         <td class="text-end">$${subtotal}</td>`;
         carritoHTML.appendChild(fila);
-        totalCarrito += parseInt(productosCarrito[i].subtotal)
-    }
+        totalCarrito += parseInt(subtotal);
+        i++;
+    });
+    // for (let i = 0; i < productosCarrito.length; i++) {
+    //     let fila = document.createElement("tr");
+    //     fila.setAttribute("class", "item-carrito");
+    //     fila.innerHTML = `<td><button id="${i}" class="bi bi-trash btn btn-warning quitar"></button></td>
+    //     <td>${productosCarrito[i].nombre}</td>
+    //     <td>${productosCarrito[i].cantidad}</td>
+    //     <td>${productosCarrito[i].precio}</td>
+    //     <td class="text-end">$${productosCarrito[i].subtotal}</td>`;
+    //     carritoHTML.appendChild(fila);
+    //     totalCarrito += parseInt(productosCarrito[i].subtotal)
+    // }
     montoTotal.innerHTML = totalCarrito;
 }
 
@@ -241,16 +282,33 @@ function cerrarCompra() {
     totalCarrito = 0;
 
     //Llenar la minuta de compra
-    for (let i = 0; i < productosCarrito.length; i++) {
+    productosCarrito.forEach(element => {
+        //Desestructurando el Objeto
+        let { nombre, cantidad, precio, subtotal } = element;
         let fila = document.createElement("tr");
         fila.setAttribute("class", "text-center");
-        fila.innerHTML = `<th scope="row" class="text-start">${productosCarrito[i].nombre}</th>
-        <td>${productosCarrito[i].cantidad}</td>
-        <td>${productosCarrito[i].precio}</td>
-        <td class="text-end">$ ${productosCarrito[i].subtotal}</td>`;
+        fila.innerHTML = 
+        ` <th scope="row" class="text-start">${nombre}</th>
+          <td>${cantidad}</td>
+          <td>${precio}</td>
+          <td class="text-end">$ ${subtotal}</td>`;
+        //Insertar la fila
         minutaHTML.appendChild(fila);
-        totalCarrito += parseInt(productosCarrito[i].subtotal);
-    }
+        totalCarrito += parseInt(subtotal);
+    });
+    // for (let i = 0; i < productosCarrito.length; i++) {
+    //     //Desestructurando el Objeto
+    //     let {nombre, cantidad, precio, subtotal} = productosCarrito[i];
+    //     let fila = document.createElement("tr");
+    //     fila.setAttribute("class", "text-center");
+    //     fila.innerHTML =
+    //      ` <th scope="row" class="text-start">${nombre}</th>
+    //        <td>${cantidad}</td>
+    //        <td>${precio}</td>
+    //        <td class="text-end">$ ${subtotal}</td>`;
+    //     minutaHTML.appendChild(fila);
+    //     totalCarrito += parseInt(subtotal);
+    // }
     montoMinuta.innerHTML = `$ ${totalCarrito}`;
 }
 
@@ -259,15 +317,13 @@ function cerrarCompra() {
  */
 
 codigoProducto.addEventListener("click", (e) => {
-    if (e.target.classList.contains("idprod")){
-        agregarCarrito(e.target.id);
-    }
+    //controlo que el evento se produzca en el elemento correcto
+    e.target.classList.contains("idprod") && agregarCarrito(e.target.id);
 })
 
 itemCarritoHTML.addEventListener("click", (e) =>{
-    if (e.target.classList.contains("quitar")){
-        quitarItemCarrito(e.target.id)
-    }
+    //controlo que el evento se produzca en el elemento correcto
+    e.target.classList.contains("quitar") && quitarItemCarrito(e.target.id);
 })
 
 cerrarCarrito.addEventListener("click", () => {
@@ -284,5 +340,6 @@ vaciarCarrito.addEventListener("click", () => {
 
 cargarProductos();
 listarProductos();
-listarCarrito();
-
+//Usando  proceso simplificado del operador OR
+productosCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
+llenarCarritoHTML();
