@@ -83,7 +83,8 @@ background: linear-gradient(135deg, rgba(242,58,58,1) 15%, rgba(145,199,128,1) 2
         border-color: green;
     }
     &__vacio{
-        border-color: red;
+        background-color: yellow;
+        opacity: .3;
     }
 }
 
@@ -119,24 +120,23 @@ background: linear-gradient(135deg, rgba(242,58,58,1) 15%, rgba(145,199,128,1) 2
     }
 }
 
-.formulario{
+.formmail{
     .boton {
         width:200px;
         height:50px;
-        background-color:white;
         text-align:center;
         color:black;
        border-radius: map-get($bordes-radio, rad2020);
         border:1px solid $color-borde;
     }
 
-    .boton__aceptar{
+    &__boton-aceptar{
         @extend .boton;
         background-color:green;
         font-weight: bold
     }
 
-    .boton__cancelar{
+    &__boton-cancelar{
         @extend .boton;
         background-color:red;
         font-weight: bold
@@ -149,6 +149,17 @@ background: linear-gradient(135deg, rgba(242,58,58,1) 15%, rgba(145,199,128,1) 2
     textarea {
         min-width: 100%;
     }
+    &__input-error {
+        display: none;
+    }
+
+    &__input-error-activo {
+        font-size: 12px;
+        color: yellow;
+        margin-bottom: 0;
+        display: block;
+    }
+
 }
 
 .barraLatDer {

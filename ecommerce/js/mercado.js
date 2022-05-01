@@ -12,59 +12,27 @@ class Producto {
         this.cantidad = 0;
         this.subtotal = 0;
     }
-
-    /* aplicarDescuento() {
-        if (this.precio > 1000) {
-            this.precio = this.precio * 0.9;
-        }
-        return this.preciofinal;
-    } */
-
-    descargarStock(cantidad) {
-        if (this.stock >= cantidad) {
-            this.stock -= cantidad;
-        } else {
-            return `NO HAY SUFICIENTE STOCK DE ESE PRODUCTO, LOS SENTIMOS MUCHO`;
-        }
-    }
 }
-
-/* 
-class Carrito {
-    constructor(codigo, producto, precio, cantidad) {
-        this.codigo = codigo;
-        this.producto = producto;
-        this.precio = precio;
-        this.cantidad = cantidad;
-    }
-
-    eliminar(productosCarrito, item) {
-        if (this.precio > 1000) {
-            this.precio = this.precio * 0.9;
-        }
-        return this.preciofinal;
-    }
-
-    comprar(cantidad) {
-        if (this.stock >= cantidad) {
-            this.stock -= cantidad;
-            return `EL PRECIO FINAL DE SU COMPRA DE ${
-                this.nombre
-            } AL VALOR UNITARIO DE ${this.precio} TIENE UN VALOR TOTAL DE ${
-                this.precio * cantidad
-            }`;
-        } else {
-            return `NO HAY SUFICIENTE STOCK DE ESE PRODUCTO, LOS SENTIMOS MUCHO`;
-        }
-    }
-}
- */
 
 /**
  *      VARIABLES Y OBJETOS GLOBALES
  */
 
-const productos = [];
+const productos = [
+    new Producto("CLÁSICAS", 11, "PEPPERONI", "../img/ecommerce/11.jpg", 1180, 10),
+    new Producto("CLÁSICAS", 12, "VEGETARIANA", "../img/ecommerce/12.jpg", 1160, 10),
+    new Producto("CLÁSICAS", 13, "HAWAIANA", "../img/ecommerce/13.jpg", 1170, 10),
+    new Producto("CLÁSICAS", 14, "MARGARITA", "../img/ecommerce/14.jpg", 1170, 15),
+    new Producto("CLÁSICAS", 15, "A LA MEXICANA", "../img/ecommerce/15.jpg", 1500, 3),
+    new Producto("LAS MÁS VENDIDAS", 21, "POLLO ASADO", "../img/ecommerce/21.jpg", 1180, 8),
+    new Producto("LAS MÁS VENDIDAS", 22, "CLÁSICA SUPER", "../img/ecommerce/22.jpg", 1750, 8),
+    new Producto("LAS MÁS VENDIDAS", 23, "JAMÓN Y ALBAHACA", "../img/ecommerce/23.jpg", 1750, 8),
+    new Producto("LAS MÁS VENDIDAS", 24, "MOZZARELLA CLÁSICA", "../img/ecommerce/24.jpg", 1750, 8),
+    new Producto("ELECCIÓN DEL CHEF", 31, "FONTINA", "../img/ecommerce/31.jpg", 2750, 8),
+    new Producto("ELECCIÓN DEL CHEF", 32, "ESPINACA Y QUESO", "../img/ecommerce/32.jpg", 2750, 8),
+    new Producto("ELECCIÓN DEL CHEF", 33, "TOCINO Y HUEVO", "../img/ecommerce/33.jpg", 3750, 8),
+    new Producto("ELECCIÓN DEL CHEF", 34, "ESPINACA-ALCAUCILES", "../img/ecommerce/34.jpg", 4750, 8)
+];
 let productosCarrito = [];
 let carritoUpdated = [];
 let articulo = "";
@@ -79,26 +47,11 @@ const codigoProducto = document.getElementById("articulos");
 const carritoHTML = document.querySelector("#listacarrito tbody");
 const minutaHTML = document.querySelector("#minuta tbody");
 const itemCarritoHTML = document.getElementById("carrito")
-
+const pagarCompra = document.getElementById("pagar")
+const minutaModal = document.getElementById("minutaModal")
 /**
  *      FUNCIONES
  */
-
-function cargarProductos() {
-    productos.push(new Producto("CLÁSICAS", 11, "PEPPERONI", "../img/ecommerce/11.jpg", 1180, 10));
-    productos.push(new Producto("CLÁSICAS", 12, "VEGETARIANA", "../img/ecommerce/12.jpg", 1160, 10));
-    productos.push(new Producto("CLÁSICAS", 13, "HAWAIANA", "../img/ecommerce/13.jpg", 1170, 10));
-    productos.push(new Producto("CLÁSICAS", 14, "MARGARITA", "../img/ecommerce/14.jpg", 1170, 15));
-    productos.push(new Producto("CLÁSICAS", 15, "A LA MEXICANA", "../img/ecommerce/15.jpg", 1500, 3));
-    productos.push(new Producto("LAS MÁS VENDIDAS", 21, "POLLO ASADO", "../img/ecommerce/21.jpg", 1180, 8));
-    productos.push(new Producto("LAS MÁS VENDIDAS", 22, "CLÁSICA SUPER", "../img/ecommerce/22.jpg", 1750, 8));
-    productos.push(new Producto("LAS MÁS VENDIDAS", 23, "JAMÓN Y ALBAHACA", "../img/ecommerce/23.jpg", 1750, 8));
-    productos.push(new Producto("LAS MÁS VENDIDAS", 24, "MOZZARELLA CLÁSICA", "../img/ecommerce/24.jpg", 1750, 8));
-    productos.push(new Producto("ELECCIÓN DEL CHEF", 31, "FONTINA", "../img/ecommerce/31.jpg", 2750, 8));
-    productos.push(new Producto("ELECCIÓN DEL CHEF", 32, "ESPINACA Y QUESO", "../img/ecommerce/32.jpg", 2750, 8));
-    productos.push(new Producto("ELECCIÓN DEL CHEF", 33, "TOCINO Y HUEVO", "../img/ecommerce/33.jpg", 3750, 8));
-    productos.push(new Producto("ELECCIÓN DEL CHEF", 34, "ESPINACA-ALCAUCILES", "../img/ecommerce/34.jpg", 4750, 8));
-}
 
 function listarProductos() {
     let listaProductos = "";
@@ -128,39 +81,12 @@ function listarProductos() {
                     <img src="${imagen}" class="card-img-top img-buffet" alt="...">
                     </div>
                     <p>$${precio}.- 
-                    <button id="${codigo}" class="btn btn-primary idprod">+</button></p>
+                    <button id="${codigo}" class="btn  btn-primary  idprod">+</button>
+                    </p>
                 </div>
             </div>`
         );
     });
-    
-    // //RECORRO LA LISTA DE PRODUCTOS
-    // for (const key in productos) {
-    //     //AGREGO CATEGORÍAS DE PRODUCTOS
-    //     if (categoria === "" || categoria !== productos[key].categoria) {
-    //         categoria = productos[key].categoria;
-    //         let newTitulo = document.createTextNode(categoria);
-    //         newCategoria.insertAdjacentHTML(
-    //             "beforeend",
-    //             `<div id="${categoria}" class="row m-2"><h5>${categoria}</h5></div>`
-    //         );
-    //     }
-    //     //AGREGO PRODUCTOS SEGÚN CATEGTORIA
-    //     newDetalle = document.getElementById(categoria);
-    //     newDetalle.insertAdjacentHTML(
-    //         "beforeend",
-    //         `<div class="card col-sm-4">
-    //             <div class="card-body">
-    //                 <h5 class="card-title">${productos[key].nombre}</h5>
-    //                 <div>
-    //                 <img src="${productos[key].imagen}" class="card-img-top img-buffet" alt="...">
-    //                 </div>
-    //                 <p>$${productos[key].precio}.- 
-    //                 <button id="${productos[key].codigo}" class="btn btn-primary idprod">+</button></p>
-    //             </div>
-    //         </div>`
-    //     );
-    // }
 }
 
 function agregarCarrito(id) {
@@ -236,17 +162,6 @@ function llenarCarritoHTML() {
         totalCarrito += parseInt(subtotal);
         i++;
     });
-    // for (let i = 0; i < productosCarrito.length; i++) {
-    //     let fila = document.createElement("tr");
-    //     fila.setAttribute("class", "item-carrito");
-    //     fila.innerHTML = `<td><button id="${i}" class="bi bi-trash btn btn-warning quitar"></button></td>
-    //     <td>${productosCarrito[i].nombre}</td>
-    //     <td>${productosCarrito[i].cantidad}</td>
-    //     <td>${productosCarrito[i].precio}</td>
-    //     <td class="text-end">$${productosCarrito[i].subtotal}</td>`;
-    //     carritoHTML.appendChild(fila);
-    //     totalCarrito += parseInt(productosCarrito[i].subtotal)
-    // }
     montoTotal.innerHTML = totalCarrito;
 }
 
@@ -296,20 +211,18 @@ function cerrarCompra() {
         minutaHTML.appendChild(fila);
         totalCarrito += parseInt(subtotal);
     });
-    // for (let i = 0; i < productosCarrito.length; i++) {
-    //     //Desestructurando el Objeto
-    //     let {nombre, cantidad, precio, subtotal} = productosCarrito[i];
-    //     let fila = document.createElement("tr");
-    //     fila.setAttribute("class", "text-center");
-    //     fila.innerHTML =
-    //      ` <th scope="row" class="text-start">${nombre}</th>
-    //        <td>${cantidad}</td>
-    //        <td>${precio}</td>
-    //        <td class="text-end">$ ${subtotal}</td>`;
-    //     minutaHTML.appendChild(fila);
-    //     totalCarrito += parseInt(subtotal);
-    // }
     montoMinuta.innerHTML = `$ ${totalCarrito}`;
+}
+// INTRODUCIR SWEET ALERT
+function realizarPago() {
+    Swal.fire({
+        title: "¡GRACIAS POR SU COMPRA!",
+        text: `!EL MONTO DE $ ${totalCarrito} FUÉ CONFIRMADO PRONTO RECIBIRÁ SU PEDIDO!`,
+        icon: "success",
+        confirmButtonText: "¡GRACIAS!"
+    });
+
+    vaciarCompra();
 }
 
 /**
@@ -330,15 +243,20 @@ cerrarCarrito.addEventListener("click", () => {
     cerrarCompra();
 })
 
+pagarCompra.addEventListener("click", () => {
+    realizarPago();
+})
+
 vaciarCarrito.addEventListener("click", () => {
     vaciarCompra();
 })
+
 
 /*
  *      MAIN 
  */
 
-cargarProductos();
+//cargarProductos();
 listarProductos();
 //Usando  proceso simplificado del operador OR
 productosCarrito = JSON.parse(localStorage.getItem("carrito")) || [];

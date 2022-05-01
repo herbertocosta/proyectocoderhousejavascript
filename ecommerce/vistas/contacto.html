@@ -9,9 +9,6 @@
         content="El club de barrio más antiguo de Buenos Aires enb el corazón de Floresta. Con muchas actividades deportivas, sociales y culturales. Bliblioteca popular y un restaurante abierto a público en general">
     <meta name="keywords" content="CLUB, PILETA, FUTSAL, TAEKWONDO, AIKIDO, TALLER DE PINTURA, FLORESTA, BIBLIOTECA">
     <link rel="shortcut icon" href="../img/escudo.png">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../css/estilosSass.css">
     <title>Dejanos tus comentarios</title>
 </head>
@@ -30,51 +27,51 @@
                     <h2 class="animate__animated animate__backInRight text-center">Asociación Cultural y Social</h2>
                 </div>
             </div>
-            <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-dark ">
-                    <div class="container-fluid header__nav">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <a class="navbar-brand " href="../index.html">
-                            <img src="../img/logo.png" alt="escudo institucional" width="40" height="40">
-                        </a>
-                        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="../index.html">INICIO</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../vistas/noticias.html">NOVEDADES</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../vistas/galeria.html">GALERIA</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../vistas/actividades.html">ACTIVIDADES</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../vistas/nosotros.html">NOSOTROS</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">CONTACTO</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../vistas/mercado.html">BUFFET</a>
-                                </li>
-                            </ul>
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                                <button class="btn btn-outline-success" type="submit">Buscar</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </div>
         </div>
     </header>
+    <div class="row header__nav">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
+            <div class="container-fluid header__nav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand " href="../index.html">
+                    <img src="../img/logo.png" alt="escudo institucional" width="40" height="40">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="../index.html">INICIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../vistas/noticias.html">NOVEDADES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../vistas/galeria.html">GALERIA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../vistas/actividades.html">ACTIVIDADES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../vistas/nosotros.html">NOSOTROS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">CONTACTO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../vistas/mercado.html">BUFFET</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
 
 
     <main class="cuerpo">
@@ -82,18 +79,20 @@
             <div class="row">
                 <div class="col-md-10">
                     <div class="border border-primary  m-3 shadow-lg p-3 mb-5 bg-success rounded">
-                        <form class="formulario p-4 bg-secondary  rounded" action="index.html" method="get" enctype="text/plain" name="formMail" id="formMail">
-                            <legend class="h3">Dejenos sus comentarios</legend>
+                        <form class="formmail p-4 bg-secondary  rounded" action="https://formsubmit.co/9f828ff21da107d227d574b81935668b" method="POST" enctype="multipart/form-data" name="formmail" id="formMail">
+                            <legend class="h3">Queremos saber</legend>
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="nombre" class="form-label">Nombre:</label>
                                     <input class="form-control" type="text" name="nombre" id="nombre"
                                         placeholder="Nombre Completo" required>
+                                    <p class="formmail__input-error" id="nombreError">*El Dato es Obligatorio</p>
                                 </div>
                                 <div class="col">
                                     <label for="apellido" class="form-label">Apellido:</label>
                                     <input class="form-control" type="text" name="apellido" id="apellido"
                                         placeholder="Apellidos Completos" required>
+                                    <p class="formmail__input-error" id="apellidoError">* El Datos es Obligatorio</p>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -101,38 +100,46 @@
                                     <label for="email" class="form-label">Correo Electrónico:</label>
                                     <input class="form-control" type="email" name="email" id="email"
                                         placeholder="Correo Electrónico" required>
+                                    <p class="formmail__input-error" id="emailError">* El Datos es Obligatorio</p>
                                 </div>
                                 <div class="col">
-                                    <label for="telefono" class="form-label">Teléfono de contacto:</label>
+                                    <label for="telefono" class="form-label">Teléfono:</label>
                                     <input class="form-control" type="tel" name="telefono" id="telefono"
-                                        placeholder="Teléfono de Contacto" required>
+                                        placeholder="Teléfono:">
+                                    <p class="formmail__input-error" id="phoneError">* El Datos es Obligatorio</p>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="comentario" class="form-label">Comentario/Sugerencia/Consulta:</label>
-                                <textarea class="form-control" name="comentario" id="comentario" rows="5"></textarea>
+                                <label for="comentario" class="form-label">Comentario:</label>
+                                <textarea class="form-control text-start" name="mensaje" id="comentario" rows="5"></textarea>
+                                <p class="formmail__input-error" id="commentError">* El Datos es Obligatorio</p>
                             </div>
-                            <div class="row mb-3 text-center">
+                            <div class="row mb-3 text-end">
                                 <div class="col-6">
-                                    <label class="h4 p-2 bg-warning" for="info">Quiero recibir Información del Club:</label>
-                                    <input class="h4 form-check-input" type="checkbox" name="info" id="info" required>
+                                    <label class="form-label" for="info">Quiero saber del Club:</label>
+                                    <input class="h4 form-check-input " type="checkbox" name="info" id="info">
                                 </div>
-                                <div class="col-6">
-                                    <label class="h4 p-2 bg-warning" for="info">Soy Socio del Club Nº:</label>
-                                    <input class="h4" type="text" name="socio" id="socio" required>
+                                <div class="col-3">
+                                    <label class="form-label" for="socio">Socio:</label>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" type="text" name="socio" id="socio">
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-between">
                                 <div class="col-6 d-flex justify-content-center">
-                                    <input type="button" id="cancelar" class="btn btn-warning boton boton__cancelar" value="Cancelar">
+                                    <input type="button" id="cancelar" class="btn btn-warning boton formmail__boton-cancelar" value="Cancelar">
                                 </div>
                                 <div class="col-6 d-flex justify-content-center">
-                                    <input type="button" id="aceptar" class="btn btn-success boton boton__aceptar" value="Enviar">
+                                    <input type="submit" id="aceptar" class="btn btn-success boton formmail__boton-aceptar" value="Enviar">
                                 </div>
                             </div>
+                            <!-- <input type="hidden" name="_webhook" value="https://127.0.0.1:5500/contacto.html"> -->
+                            <input type="hidden" name="_captcha" value="false">
+                            <!-- <input type="hidden" name="_subject" value="New submission!"> -->
+                            <input type="hidden" name="_next" value="http://127.0.0.1:5500/ecommerce/vistas/contacto.html">
                         </form>
                     </div>
-
                 </div>
                 <div class="col-md-2 barraLatDer">
                     <p><strong>Enlaces Externos</strong></p>
@@ -150,7 +157,6 @@
             </div>
         </div>
     </main>
-
 
     <footer class="footer">
         <div class="container-fluid">
@@ -181,8 +187,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    
     <script src="../js/contacto.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

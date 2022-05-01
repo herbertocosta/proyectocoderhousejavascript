@@ -1,13 +1,26 @@
-const nombre = document.querySelector("#nombre");
-const apellido = document.querySelector("#apellido");
-const email = document.querySelector("#email");
-const telefono  = document.querySelector("#telefono");
-const comentario = document.querySelector("#comentario");
-const info = document.querySelector("#info");
-const socio = document.querySelector("#socio");
+/**
+ *      DEFINIR VARIABLES DEL DOM
+ */
+const nombre = document.getElementById("nombre");
+const apellido = document.getElementById("apellido");
+const email = document.getElementById("email");
+const telefono = document.getElementById("telefono");
+const comentario = document.getElementById("comentario");
+const info = document.getElementById("info");
+const socio = document.getElementById("socio");
 const btnaceptar = document.querySelector("#aceptar");
 const btncancelar = document.querySelector("#cancelar");
+const formMail = document.getElementById("formMail");
+const nombreError = document.getElementById("nombreError");
+const apellidoError = document.getElementById("apellidoError");
+const emailError = document.getElementById("emailError");
+const phoneError = document.getElementById("phoneError");
+const commentError = document.getElementById("commentError");
+const asunto = document.getElementsByName("_subject");
 
+/**
+ *      DEFINIR CLASES
+ */
 class Contacto {
     constructor(formNombre, formApellido, formEmail, formTelefono, formMensaje, formRecibirNovedades, formNroSocio) {
         this.formNombre = formNombre;
@@ -30,66 +43,102 @@ class Contacto {
     }
 }
 
+/**
+ *      DEFINIR FUNCIONES 
+ */
+
 validarFormulario = () =>  {
-    let mensajeError = '';
+    let mensajeError = false;
 
     if(nombre.value === '') {
-        mensajeError += `EL NOMBRE ES OBLIGATORIO \n`
+        mensajeError = true;
         nombre.className = "form-control cuerpo__vacio";
+        nombreError.className = "formmail__input-error-activo";
     }else{
         nombre.className = "form-control cuerpo__valido";
+        nombreError.className = "formmail__input-error";
+
     }
     if (apellido.value === "") {
-        mensajeError += `EL APELLIDO ES OBLIGATORIO \n`;
+        mensajeError = true;
         apellido.className = "form-control cuerpo__vacio";
+        apellidoError.className = "formmail__input-error-activo";
     } else {
+        apellidoError.className = "formmail__input-error";
         apellido.className = "form-control cuerpo__valido";
     }
     if (email.value === "" && telefono.value === "") {
-        mensajeError += `EL CORREO ELECTRÓNICO O SU TELÉFONO SON NECESARIOS (¡NO PODRÍAMOS RESPONDERLE!) \n`;
+        mensajeError = true;
         email.className = "form-control cuerpo__vacio";
-        telefono.className = "form-control cuerpo__vacio";
+        emailError.className = "formmail__input-error-activo";
+        
     } else {
         email.className = "form-control cuerpo__valido";
-        telefono.className = "form-control cuerpo__valido";
+        emailError.className = "formmail__input-error";
     }
     if (comentario.value === "") {
-        mensajeError += `¡EL MENSAJE ES IMPORTANTISIMO PARA NOSOTROS! ¡NO LO OLVIDES, POR FAVOR! \n`;
+        mensajeError = true;
         comentario.className = "form-control cuerpo__vacio";
+        commentError.className = "formmail__input-error-activo";
     } else {
         comentario.className = "form-control cuerpo__valido";
+        commentError.className = "formmail__input-error";
     }
     return mensajeError;
 }
 
-enviarFormulario = (contacto) => {
-    let activarSocio = (contacto.formNroSocio === "" ? 'NO ES SOCIO' : `NRO DE SOCIO ${contacto.formNroSocio}`);
-    let activarMensajes = (contacto.formRecibirNovedades !== true  ? 'NO QUIERO RECIBIR INFORMACIÓN ' : 'ENVIAR INFORMACIÓN SOBRE LAS ACTIVIDADES DEL CLUB ');
-    let bodyMail = `mailto:herbertocosta@gmail.com?subject=MENSAJE DE: ${contacto.formApellido.toUpperCase()}, ${contacto.formNombre.toUpperCase()} ${activarSocio} \n &body=${contacto.formMensaje} \n ${activarMensajes}`
-    bodyMail +=  (contacto.formTelefono === "" ? `COMUNICARSE  POR MAIL A ${contacto.formEmail}`  : `COMUNICARSE AL ${contacto.formTelefono} y/o POR MAIL A ${contacto.formEmail}`);
-    console.log(bodyMail);
-    alert(bodyMail);
+
+
+//RESETEO ERRORES
+resetearErrores  = () =>{
+    nombreError.className="formmail__input-error";
+    apellidoError.className="formmail__input-error";
+    emailError.className="formmail__input-error";
+    phoneError.className="formmail__input-error";
+    commentError.className="formmail__input-error";
 }
 
 //PONGO FOCO EN EL PRIMER INPUT
 nombre.focus();
+resetearErrores();
 //CONSTRUYO EL ARRAY QUE SERÁ MI BD
 const arrayContactos = [];
 //OPRIMIR  EL BOTON ACEPTAR VALIDAR LA INFO , GUARDAR LA INFO Y ENVIAR EL MAIL
 btnaceptar.onclick = (e) =>  {
     e.preventDefault();
     errores = validarFormulario();
-    if (errores === ""){
+    if (!errores){
         const nuevoContacto = new Contacto(nombre.value, apellido.value, email.value, telefono.value, comentario.value, (info.checked==true ? true : false), socio.value);
-        enviarFormulario(nuevoContacto);
         arrayContactos.push(nuevoContacto);
+        localStorage.setItem("mensaje",JSON.stringify(nuevoContacto));
+        Swal.fire({
+           title: "¡GRACIAS!",
+           text: "!SU MENSAJE FUÉ ENVIADO PRONTO RECIBIRÁ NUESTRA RESPUESTA!",
+           icon: "success",
+           timer: 100000
+        });
+        formMail.submit();
     }else{
-        alert(errores);
+        Swal.fire({
+            title: "¡UPS!",
+            text: "No podemos enviar su Mensaje, parece estar incompleto, Verifíquelo por Favor",
+            icon: "error",
+            confirmButtonText: "OK!",
+            timer: 10000,
+        });
+
     }
 }
 
 btncancelar.onclick = (e) => {
     e.preventDefault();
     document.getElementById("formMail").reset();
+    Swal.fire({
+        title: "¡GRACIAS!",
+        text: "SU MENSAJE FUÉ CANCELADO",
+        icon: "success",
+        confirmButtonText: "OK!",
+        timer: 10000
+    });
 }
 

@@ -8,7 +8,7 @@ $color-borde: #e76f51 solid 1px;
 $font-gral: 'Roboto Condensed', sans-serif;
 $bordes-angulares:15px 0;
 $percent-degree:.6;
-$width-img:120px;
+$width-img:100px;
 $font-size: 3rem; 
 $bordes-radio: (
     rad0505: 5px,
@@ -41,14 +41,14 @@ html {
 .header {
     color: $color-text;
     background-image: url("../img/fondoHeader.jpg");
-    background-size: cover;
+    background-size: contain;
     background-position: top;
      @include padding-margin(0.4rem, 0rem);
-    position: sticky;
-    top: 0;
+    //position: sticky;
+    //top: 0;
     border: $color-borde;
     border-radius: map-get($bordes-radio, rad1515);
-    z-index: 9998;
+    //z-index: 9998;
     font-family: "Aldrich", sans-serif;
     &__logo img {
         width: $width-img;
@@ -61,10 +61,14 @@ html {
         font-size: $font-size*.5;
     }
     &__nav {
+        font-family: "Aldrich", sans-serif;
         background-color: $color-text;
         @include padding-margin(0rem, 0rem); 
         border: $color-borde;
         border-radius: map-get($bordes-radio, rad0505);
+        position: sticky;
+        top: 0;
+        z-index: 9998;
         & a {
             color: $color-borde !important;
             text-decoration: none;
