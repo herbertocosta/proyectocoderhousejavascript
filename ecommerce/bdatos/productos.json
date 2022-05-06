@@ -1,0 +1,15 @@
+[
+    {"categoria": "CLÁSICAS", "codigo": 11, "nombre":"PEPPERONI", "imagen":"../img/ecommerce/11.jpg", "precio":1180,"stock":10},
+    {"categoria": "CLÁSICAS", "codigo": 12, "nombre":"VEGETARIANA", "imagen":"../img/ecommerce/12.jpg", "precio":1160,"stock":10},
+    {"categoria": "CLÁSICAS", "codigo": 13, "nombre":"HAWAIANA", "imagen":"../img/ecommerce/13.jpg", "precio":1170,"stock":10},
+    {"categoria": "CLÁSICAS", "codigo": 14, "nombre":"MARGARITA", "imagen":"../img/ecommerce/14.jpg", "precio":1170,"stock":15},
+    {"categoria": "CLÁSICAS", "codigo": 15, "nombre":"A LA MEXICANA", "imagen":"../img/ecommerce/15.jpg", "precio":1500,"stock":3},
+    {"categoria": "LAS MÁS VENDIDAS", "codigo": 21, "nombre": "POLLO ASADO", "imagen":"../img/ecommerce/21.jpg", "precio":1180,"stock":8},
+    {"categoria": "LAS MÁS VENDIDAS", "codigo": 22, "nombre": "CLÁSICA SUPER", "imagen":"../img/ecommerce/22.jpg", "precio":1750,"stock":8},
+    {"categoria": "LAS MÁS VENDIDAS", "codigo": 23, "nombre": "JAMÓN Y ALBAHACA", "imagen":"../img/ecommerce/23.jpg", "precio":1750,"stock":8},
+    {"categoria": "LAS MÁS VENDIDAS", "codigo": 24, "nombre": "MOZZARELLA CLÁSICA", "imagen":"../img/ecommerce/24.jpg", "precio":1750,"stock":8},
+    {"categoria": "ELECCIÓN DEL CHEF", "codigo": 31, "nombre": "FONTINA", "imagen":"../img/ecommerce/31.jpg", "precio":2750,"stock":8},
+    {"categoria": "ELECCIÓN DEL CHEF", "codigo": 32, "nombre": "ESPINACA Y QUESO", "imagen":"../img/ecommerce/32.jpg", "precio":2750,"stock":8},
+    {"categoria": "ELECCIÓN DEL CHEF", "codigo": 33, "nombre": "TOCINO Y HUEVO", "imagen":"../img/ecommerce/33.jpg", "precio":3750,"stock":8},
+    {"categoria": "ELECCIÓN DEL CHEF", "codigo": 34, "nombre": "ESPINACA-ALCAUCILES", "imagen":"../img/ecommerce/34.jpg", "precio":4750,"stock":8}
+]

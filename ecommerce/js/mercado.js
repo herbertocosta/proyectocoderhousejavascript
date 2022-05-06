@@ -18,21 +18,7 @@ class Producto {
  *      VARIABLES Y OBJETOS GLOBALES
  */
 
-const productos = [
-    new Producto("CLÁSICAS", 11, "PEPPERONI", "../img/ecommerce/11.jpg", 1180, 10),
-    new Producto("CLÁSICAS", 12, "VEGETARIANA", "../img/ecommerce/12.jpg", 1160, 10),
-    new Producto("CLÁSICAS", 13, "HAWAIANA", "../img/ecommerce/13.jpg", 1170, 10),
-    new Producto("CLÁSICAS", 14, "MARGARITA", "../img/ecommerce/14.jpg", 1170, 15),
-    new Producto("CLÁSICAS", 15, "A LA MEXICANA", "../img/ecommerce/15.jpg", 1500, 3),
-    new Producto("LAS MÁS VENDIDAS", 21, "POLLO ASADO", "../img/ecommerce/21.jpg", 1180, 8),
-    new Producto("LAS MÁS VENDIDAS", 22, "CLÁSICA SUPER", "../img/ecommerce/22.jpg", 1750, 8),
-    new Producto("LAS MÁS VENDIDAS", 23, "JAMÓN Y ALBAHACA", "../img/ecommerce/23.jpg", 1750, 8),
-    new Producto("LAS MÁS VENDIDAS", 24, "MOZZARELLA CLÁSICA", "../img/ecommerce/24.jpg", 1750, 8),
-    new Producto("ELECCIÓN DEL CHEF", 31, "FONTINA", "../img/ecommerce/31.jpg", 2750, 8),
-    new Producto("ELECCIÓN DEL CHEF", 32, "ESPINACA Y QUESO", "../img/ecommerce/32.jpg", 2750, 8),
-    new Producto("ELECCIÓN DEL CHEF", 33, "TOCINO Y HUEVO", "../img/ecommerce/33.jpg", 3750, 8),
-    new Producto("ELECCIÓN DEL CHEF", 34, "ESPINACA-ALCAUCILES", "../img/ecommerce/34.jpg", 4750, 8)
-];
+let productos = []
 let productosCarrito = [];
 let carritoUpdated = [];
 let articulo = "";
@@ -54,39 +40,48 @@ const minutaModal = document.getElementById("minutaModal")
  */
 
 function listarProductos() {
-    let listaProductos = "";
-    let categoria = "";
-    let categoriaAnt = "";
-    //RECORRO LA LISTA DE PRODUCTOS
-    productos.forEach((element) => {
-        //APLICO DESESTRUCTURACIÓN
-        let { categoria, nombre, imagen, precio, codigo } = element;
-        //AGREGO CATEGORÍAS DE PRODUCTOS
-        if (categoriaAnt === "" || categoriaAnt !== categoria) {
-            categoriaAnt = categoria;
-            let newTitulo = document.createTextNode(categoriaAnt);
-            newCategoria.insertAdjacentHTML(
-                "beforeend",
-                `<div id="${categoriaAnt}" class="row m-2"><h5>${categoriaAnt}</h5></div>`
-            );
-        }
-        //AGREGO PRODUCTOS SEGÚN CATEGTORIA
-        newDetalle = document.getElementById(categoria);
-        newDetalle.insertAdjacentHTML(
-            "beforeend",
-            `<div class="card col-sm-4">
-                <div class="card-body">
-                    <h5 class="card-title">${nombre}</h5>
-                    <div>
-                    <img src="${imagen}" class="card-img-top img-buffet" alt="...">
-                    </div>
-                    <p>$${precio}.- 
-                    <button id="${codigo}" class="btn  btn-primary  idprod">+</button>
-                    </p>
-                </div>
-            </div>`
-        );
-    });
+    //LEER LA TABLA DE PRODUCTOS DESDE UNA BASE DE DATOS JSON USANDO FETCH
+    fetch("../bdatos/productos.json")
+        .then(connectOk => connectOk.json())
+        .then(resultSet => {
+                let listaProductos = "";
+                let categoria = "";
+                let categoriaAnt = "";
+                //RECORRO LA LISTA DE PRODUCTOS
+                resultSet.forEach(element => {
+                    //ARMAR UN ARRAY DE PRODUCTOS
+                    productos.push(new Producto(element.categoria, element.codigo, element.nombre, element.imagen, element.precio, element.stock));
+                    //APLICO DESESTRUCTURACIÓN
+                    let { categoria, codigo, nombre, imagen, precio, stock } = element;
+                    //AGRUPAR POR CATEGORÍAS DE PRODUCTOS
+                    if (categoriaAnt === "" || categoriaAnt !== categoria) {
+                        categoriaAnt = categoria;
+                        let newTitulo = document.createTextNode(categoriaAnt);
+                        newCategoria.insertAdjacentHTML(
+                            "beforeend",
+                            `<div id="${categoriaAnt}" class="row m-2"><h5><strong>${categoriaAnt}</strong></h5></div>`
+                        );
+                    }
+                    //AGREGO PRODUCTOS SEGÚN CATEGTORIA
+                    newDetalle = document.getElementById(categoria);
+                    newDetalle.insertAdjacentHTML(
+                        "beforeend",
+                        `<div class="card col-md-3 border-warning">
+                            <div class="card-header">
+                                <h5 class="card-title">${nombre}</h5>
+                            </div>
+                            <div class="card-body">
+                                <img src="${imagen}" class="card-img-top img-buffet border" alt="...">
+                            </div>
+                            <div class="card-footer text-end">
+                                <span>$${precio}.-</span>
+                                <button id="${codigo}" class="btn btn-primary idprod text-end">+</button>
+                            </div>
+                        </div>`
+                    );
+                });
+            })
+        .catch(error => console.log(error))
 }
 
 function agregarCarrito(id) {
@@ -257,6 +252,7 @@ vaciarCarrito.addEventListener("click", () => {
  */
 
 //cargarProductos();
+
 listarProductos();
 //Usando  proceso simplificado del operador OR
 productosCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
