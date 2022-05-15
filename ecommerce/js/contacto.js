@@ -17,6 +17,7 @@ const emailError = document.getElementById("emailError");
 const phoneError = document.getElementById("phoneError");
 const commentError = document.getElementById("commentError");
 const asunto = document.getElementsByName("_subject");
+const arrayContactos = [];
 
 /**
  *      DEFINIR CLASES
@@ -46,44 +47,29 @@ class Contacto {
 /**
  *      DEFINIR FUNCIONES 
  */
+validarDato = (param) => {
+    return param.value || "Falsy";
+}
+
+validarError = (param, param1) => {
+    if(validarDato(param)==="Falsy"){
+        param.className = "form-control cuerpo__vacio";
+        param1.className = "formmail__input-error-activo";
+        return true
+    }else{
+        param.className = "form-control cuerpo__valido";
+        param1.className = "formmail__input-error";
+    }
+}
 
 validarFormulario = () =>  {
     let mensajeError = false;
 
-    if(nombre.value === '') {
-        mensajeError = true;
-        nombre.className = "form-control cuerpo__vacio";
-        nombreError.className = "formmail__input-error-activo";
-    }else{
-        nombre.className = "form-control cuerpo__valido";
-        nombreError.className = "formmail__input-error";
-
-    }
-    if (apellido.value === "") {
-        mensajeError = true;
-        apellido.className = "form-control cuerpo__vacio";
-        apellidoError.className = "formmail__input-error-activo";
-    } else {
-        apellidoError.className = "formmail__input-error";
-        apellido.className = "form-control cuerpo__valido";
-    }
-    if (email.value === "" && telefono.value === "") {
-        mensajeError = true;
-        email.className = "form-control cuerpo__vacio";
-        emailError.className = "formmail__input-error-activo";
-        
-    } else {
-        email.className = "form-control cuerpo__valido";
-        emailError.className = "formmail__input-error";
-    }
-    if (comentario.value === "") {
-        mensajeError = true;
-        comentario.className = "form-control cuerpo__vacio";
-        commentError.className = "formmail__input-error-activo";
-    } else {
-        comentario.className = "form-control cuerpo__valido";
-        commentError.className = "formmail__input-error";
-    }
+    mensajeError = validarError(nombre, nombreError)
+    mensajeError = validarError(apellido, apellidoError)
+    mensajeError = validarError(email, emailError)
+    mensajeError = validarError(comentario, commentError);
+    
     return mensajeError;
 }
 
@@ -101,8 +87,8 @@ resetearErrores  = () =>{
 //PONGO FOCO EN EL PRIMER INPUT
 nombre.focus();
 resetearErrores();
-//CONSTRUYO EL ARRAY QUE SERÁ MI BD
-const arrayContactos = [];
+
+
 //OPRIMIR  EL BOTON ACEPTAR VALIDAR LA INFO , GUARDAR LA INFO Y ENVIAR EL MAIL
 btnaceptar.onclick = (e) =>  {
     e.preventDefault();
@@ -110,7 +96,8 @@ btnaceptar.onclick = (e) =>  {
     if (!errores){
         const nuevoContacto = new Contacto(nombre.value, apellido.value, email.value, telefono.value, comentario.value, (info.checked==true ? true : false), socio.value);
         arrayContactos.push(nuevoContacto);
-        localStorage.setItem("mensaje",JSON.stringify(nuevoContacto));
+        //localStorage.removeItem("mensaje");
+        localStorage.setItem("mensaje",JSON.stringify(arrayContactos));
         Swal.fire({
            title: "¡GRACIAS!",
            text: "!SU MENSAJE FUÉ ENVIADO PRONTO RECIBIRÁ NUESTRA RESPUESTA!",

@@ -464,7 +464,106 @@ console.log(`La cantidad de Números ingresados fue de ${cantNumeros} \n La cant
 // } while (true);
 
 /* ------------------------------------------------------------ */
-/* DESAFÍO GENÉRICO  CLASS  7                                        */
+/* DESAFÍO CARGAR API EXTERNA                                   */
 /* ------------------------------------------------------------ */
+let fechaactual = new Date();
+fechaactual=`${fechaactual.getFullYear()}-${fechaactual.getMonth()+1}-${fechaactual.getDate()}`;
+// console.log(fechaactual)
+// console.log(
+//         `${fechaactual.getFullYear()}-${fechaactual.getMonth()+1}-${fechaactual.getDate()}`
+// );
+//document.getElementById("fecha").value = fechaactual.getFullYear()+"-"+(fechaactual.getMonth()+1)+"-"+fechaactual.getDate();
+const fechaelegida = document.getElementById("fecha")
+const contenedorNoticias = document.getElementById("acordeon");          
 
+fechaelegida.addEventListener("change", (e) => {
+    //controlo que el evento se produzca en el elemento correcto
+    cargarNoticias();
+});
 
+function cargarNoticias() {
+    const selectDate = fechaelegida.value
+    if (
+        Date.parse(selectDate) > Date.parse(fechaactual)
+    ) {
+        Swal.fire({
+            title: "¡DISCULPE!",
+            text: "!SOLO PODEMOS MOSTRARLE LAS NOTICIAS DE LOS ÚLTIMOS 30 DIAS CORRIDOS A LA FECHA!",
+            icon: "error",
+            timer: 100000,
+        });
+        return;
+    }
+
+    let url = `https://newsapi.org/v2/everything?q=Apple&from=${selectDate}&to=${selectDate}&sortBy=popularity&apiKey=964e2c8419e74e94aba7221a34d3646c`;
+    
+//    let req = new Request(url);
+    
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            noticias = data.articles;
+            construirNoticias(noticias);
+        })
+        .catch((error) => console.log(error));
+}    
+
+const construirNoticias = (noticias) => {
+    contenedorNoticias.innerHTML = "";
+    let noticia = "";
+    let contador = 0;
+    let collapsed = `class="accordion-button"`;
+    let collapseddet = `accordion-collapse collapse show`;
+    let ariaexpanded = `true`;
+    let fecha = "";
+    
+    if (typeof noticias === 'undefined'){
+        Swal.fire({
+            title: "¡DISCULPE!",
+            text: "!SOLO PODEMOS MOSTRARLE LAS NOTICIAS DE LOS ÚLTIMOS 30 DIAS CORRIDOS A LA FECHA!",
+            icon: "error",
+            timer: 100000,
+        });
+        return;
+    }
+
+    noticias.forEach(element => {
+
+        fecha = element.publishedAt.split("T")[0].split("-");
+
+        noticia = `<div class="accordion-item">
+        <h2 class="accordion-header" id="copete${contador}">
+            <button ${collapsed} type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse${contador}" aria-expanded="${ariaexpanded}" aria-controls="collapse${contador}">
+                <strong> ${fecha[2]}/${fecha[1]}/${fecha[0]}
+                - ${element.title}
+            </button>
+        </h2>
+        <div id="collapse${contador}" class="${collapseddet}" aria-labelledby="copete${contador}"
+            data-bs-parent="#selector">
+            <div class="accordion-body">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <img class="imagen" src="${element.urlToImage}"
+                                alt="foto noticias del barrio">
+                        </div>
+                        <div class="col-md-8">
+                            <p>
+                                ${element.description}
+                            </p>
+                            <a href="${element.url}">Fuente: ${element.author}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>`;
+    ariaexpanded = `false`;
+    collapsed = `class="accordion-button collapsed"`;
+    collapseddet = `accordion-collapse collapse`;
+    contenedorNoticias.innerHTML += noticia;
+    contador++;
+    });
+
+}

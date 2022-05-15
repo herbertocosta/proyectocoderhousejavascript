@@ -83,13 +83,13 @@
                             <legend class="h3">Queremos saber</legend>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <label for="nombre" class="form-label">Nombre:<sup><b>*</b></sup></label>
                                     <input class="form-control" type="text" name="nombre" id="nombre"
                                         placeholder="Nombre Completo" required>
                                     <p class="formmail__input-error" id="nombreError">*El Dato es Obligatorio</p>
                                 </div>
                                 <div class="col">
-                                    <label for="apellido" class="form-label">Apellido:</label>
+                                    <label for="apellido" class="form-label">Apellido:<sup><b>*</b></sup></label>
                                     <input class="form-control" type="text" name="apellido" id="apellido"
                                         placeholder="Apellidos Completos" required>
                                     <p class="formmail__input-error" id="apellidoError">* El Datos es Obligatorio</p>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <label for="email" class="form-label">Correo Electrónico:</label>
+                                    <label for="email" class="form-label">Correo Electrónico:<sup><b>*</b></sup></label>
                                     <input class="form-control" type="email" name="email" id="email"
                                         placeholder="Correo Electrónico" required>
                                     <p class="formmail__input-error" id="emailError">* El Datos es Obligatorio</p>
@@ -106,11 +106,11 @@
                                     <label for="telefono" class="form-label">Teléfono:</label>
                                     <input class="form-control" type="tel" name="telefono" id="telefono"
                                         placeholder="Teléfono:">
-                                    <p class="formmail__input-error" id="phoneError">* El Datos es Obligatorio</p>
+                                    <p class="formmail__input-error" id="phoneError">* El Datos es Obligatorio si no agregó su Correo Electrónico</p>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="comentario" class="form-label">Comentario:</label>
+                                <label for="comentario" class="form-label">Comentario:<sup><b>*</b></sup></label>
                                 <textarea class="form-control text-start" name="mensaje" id="comentario" rows="5"></textarea>
                                 <p class="formmail__input-error" id="commentError">* El Datos es Obligatorio</p>
                             </div>
@@ -133,6 +133,7 @@
                                 <div class="col-6 d-flex justify-content-center">
                                     <input type="submit" id="aceptar" class="btn btn-success boton formmail__boton-aceptar" value="Enviar">
                                 </div>
+                                <p class="formmail__input-error-activo" id="commentError">(*) Datos Obligatorios</p>
                             </div>
                             <!-- <input type="hidden" name="_webhook" value="https://127.0.0.1:5500/contacto.html"> -->
                             <input type="hidden" name="_captcha" value="false">
